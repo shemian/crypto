@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Trading\WalletController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +18,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('layouts.home');
 });
-// Route::get('/', function () {
-//     return view('home2');
-// });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//user wallet group routes
+
+Route::prefix('')->middleware(['auth'])->group(function(){
+
+Route::get('/wallet', [WalletController::class, 'index'])->name('wallet');
+Route::post('/wallet', [WalletController::class, 'purchase'])->name('purchase'); 
+Route::put('/wallet', [WalletController::class, 'update'])->name('update_user_profile');
+
+});
+//admin Routes
+Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function(){
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+});
