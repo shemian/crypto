@@ -21,7 +21,19 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone_number',
+        'country',
+        'city',
+        'zipcode',
+        'bitcoin_address',
+        'eth_address',
+        'perfect_money_address',
+        'role_as'
     ];
+
+    public function deposits(){
+        return $this->hasMany(Deposit::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
