@@ -220,33 +220,41 @@
             <span>
               2
             </span>
-            <h3>Link your bank account </h3>
+            <h3>Deposit</h3>
           </div>
         </div>
         <div class="col-md-4">
           <div class="landing-feature-item">
             <img src="assets/img/landing/trade.svg" alt="">
             <span>3</span>
-            <h3>Start buying & selling</h3>
+            <h3>Invest And Cash Out anytime</h3>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+ 
+  <br>
+
+  @include('layouts.pricing')
+  <br>
+
   <div class="landing-sub">
     <div class="container">
       <div class="row">
         <div class="offset-md-1 col-md-10">
           <div class="landing-sub-content">
-            <h2>Become part of a global community of people who have found their path to the crypto world with Crypo
+            <h2>Become part of a global community of people who have found their path to the crypto world with Crypto
             </h2>
-            <a href="signup-dark.html">Get Started</a>
+            <a href="{{route ('register') }}">Get Started</a>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  
 
 @endsection
 
