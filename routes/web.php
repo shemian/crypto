@@ -34,6 +34,8 @@ Route::put('/wallet', [WalletController::class, 'update'])->name('update_user_pr
 //admin Routes
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/regusers', [DashboardController::class, 'regUsers'])->name('regusers');
+    Route::get('/transactions', [DashboardController::class, 'getTransactions'])->name('transactions');
 
 
 });
