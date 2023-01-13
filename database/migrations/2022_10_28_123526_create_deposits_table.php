@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\TransactionStatus;
 
 class CreateDepositsTable extends Migration
 {
@@ -14,11 +15,12 @@ class CreateDepositsTable extends Migration
     public function up()
     {
         Schema::create('deposits', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->integer('amount');
             $table->string('coin');
             $table->string('transaction_code');
+            $table->string('status')->default(TransactionStatus::Pending);
             $table->timestamps();
             $table->foreign('user_id')->on('users')->references('id')->onDelete('CASCADE')->onUpdate('CASCADE');
         });
