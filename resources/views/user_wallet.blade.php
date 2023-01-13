@@ -35,7 +35,7 @@
                             <div class="card bg-light mb-3" style="max-width: 18rem;">
                             <div class="card-header d-flex justify-content-center">Deposit Balance</div>
                             <div class="card-body">
-                                <h2 class="card-text d-flex justify-content-center green"><span><strong style="color:green">$</strong style="color:green">5000</span></h2>
+                                <h2 class="card-text d-flex justify-content-center green"><span><strong style="color:green">$ {{ $amounts}}</strong style="color:green"></span></h2>
                             </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                             <div class="card bg-light mb-3" style="max-width: 18rem;">
                             <div class="card-header d-flex justify-content-center">Available Balance</div>
                             <div class="card-body">
-                                <h2 class="card-text d-flex justify-content-center green"><span><strong style="color:green">$</strong style="color:green">5000</span></h2>
+                                <h2 class="card-text d-flex justify-content-center green"><span><strong style="color:green">$</strong style="color:green">{{ $amounts}}</span></h2>
                             </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                             <div class="card bg-light mb-3">
                             <div class="card-header d-flex justify-content-center">Most Purchased Plan</div>
                             <div class="card-body">
-                                <h3 class="card-text d-flex justify-content-center"><span><strong style="color:red">$</strong>5000</span></h3>
+                                <h3 class="card-text d-flex justify-content-center"><span><strong style="color:red">$</strong>500</span></h3>
                                 <div class="justify-content-center">
 
                                     <ul>
@@ -156,8 +156,7 @@
                   <h5 class="card-title">General Information</h5>
                   <div class="settings-profile">
                     <form action="{{ route('update_user_profile') }}" method="post">
-                    @csrf
-                    @method('PUT')
+                   
                       <div class="form-row mt-4">
                         <div class="col-md-6">
                           <label for="name">First name</label>
@@ -419,7 +418,15 @@
                       <div class="tab-pane fade show active" id="coinBTC" role="tabpanel">
                         <div class="card">
                           <div class="card-body">
-                            <h5 class="card-title">Balances</h5>
+                            <h5 class="card-title">Deposit</h5>
+                            @if(Session::has('message-sent'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                              <strong>Great </strong> {{Session::get('message-sent')}}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            @endif
                             <form action="{{ route('purchase') }}" method="POST">
                               @csrf
                               <div class="form-row mt-4">
@@ -449,19 +456,19 @@
                             </form>  
                           </div>
                         </div>
+                        @if(Session::has('message-sent'))
                         <div class="card">
                           <div class="card-body">
                             <h5 class="card-title">Wallet Deposit Address</h5>
                             <div class="row wallet-address">
                               <div class="col-md-8">
-                                <p>Deposits to this address are unlimited. Note that you may not be able to withdraw all
-                                  of your
-                                  funds at once if you deposit more than your daily withdrawal limit.</p>
+                                <p> PLEASE SEND EXACTLY {{$transaction->amount}} USD Worth Of {{$transaction->coin}}
+                               
+                                 Scan the QR Code or copy the wallet address and send TO this Address
+                              
+                              </p>
                                 <div class="input-group">
-                                  <input type="text" class="form-control" value="Ad87deD4gEe8dG57Ede4eEg5dREs4d5e8f4e">
-                                  <div class="input-group-prepend">
-                                    <button class="btn btn-primary">COPY</button>
-                                  </div>
+                                  <input type="text" class="form-control" value="Ad87deD4gEe8dG57Ede4eEg5dREs4d5e8f4e"> 
                                 </div>
                               </div>
                               <div class="col-md-4">
@@ -470,6 +477,7 @@
                             </div>
                           </div>
                         </div>
+                        @endif
                         <div class="card">
                           <div class="card-body">
                             <h5 class="card-title">Latest Transactions</h5>
@@ -494,7 +502,11 @@
                                     <td>{{$transaction->created_at}}</td>
                                     <td>{{$transaction->amount}}</td>
                                     <td>{{$transaction->coin}}</td>
-                                    <td><i class="icon ion-md-checkmark-circle-outline red"></i></td>
+                                    @if($transaction->status == 0)
+                                    <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
+                                    @else
+                                      <td><i class="icon ion-md-checkmark-circle-outline red"></i></td>
+                                    @endif
                                 </tr>
                                 @endforeach
                                  
@@ -515,7 +527,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Withdraw</h5>
                   <div class="settings-notification">
-                    <form action="" method="post">
+                    <form  method="post" action="{{ route('withdraw_request') }}">
                         @csrf
                         <div class="form-row">
                             <div class="col-md-12">
@@ -577,7 +589,7 @@
                             <th>Status</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <!-- <tbody>
                         @foreach($transactions as $transaction)
                         <tr>
                                     
@@ -591,12 +603,48 @@
                         </tr>
                         @endforeach
                         
-                      </tbody>
+                      </tbody> -->
                     </table>
                   </div>
                 </div>
               </div>
             </div>
+            <!-- Button trigger modal -->
+
+
+              <!-- Purchase Investment plan Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                    <form action="" method="post" >
+                      <p>IF YOU DO NOT HAVE SUFFICIENT BALANCE IN YOUR DEPOSIT ACCOUNT, THE REQUIRED FEE WILL BE DEDUCTED FROM YOUR PROFIT BALANCE.</p>
+                      <input type="hidden"  class="form-control" id ="transaction_id" name="transaction_id">
+
+                      <label for="amount"  style="color: black">Wallet Balance: </label>
+                      <input class="form-control" type="text" name="amount" value="$ {{ $amounts}}" disabled>
+
+                      <label for="status" style="color: black">USD: </label>
+                      <input class="form-control" id="status" type="number" min="0.00" max="100000.00" name="status">
+
+                      <span class ="text-danger error-text status_error"></span>
+                      
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Purchase</button>
+                    </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
 
             <div class="tab-pane fade" id="invest" role="tabpanel" aria-labelledby="invest-tab">
               <div class="card">
@@ -624,7 +672,7 @@
                                     </div>
                                     <br>
                                     <div class="pricingTable-signup">
-                                        <a class="btn btn-primary" href="">Purchase The Plan</a>
+                                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >Purchase The Plan</a>
                                     </div>
                                 </div>
                             </div>
@@ -650,7 +698,7 @@
                                     </div>
                                     <br>
                                     <div class="pricingTable-signup">
-                                        <a class="btn btn-primary" href="">Purchase The Plan</a>
+                                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Purchase The Plan</a>
                                     </div>
                                 </div>
                             </div>
@@ -676,7 +724,7 @@
                                     </div>
                                     <br>
                                     <div class="pricingTable-signup">
-                                        <a class="btn btn-primary" href="">Purchase The Plan</a>
+                                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >Purchase The Plan</a>
                                     </div>
                                 </div>
                             </div>
@@ -702,7 +750,7 @@
                                     </div>
                                     <br>
                                     <div class="pricingTable-signup">
-                                        <a class="btn btn-primary" href="">Purchase The Plan</a>
+                                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >Purchase The Plan</a>
                                     </div>
 
                                 </div>
@@ -838,6 +886,8 @@
       </div>
     </div>
   </div>
+
+
 
 
 
