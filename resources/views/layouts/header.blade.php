@@ -1,6 +1,6 @@
 <header class="dark-bb">
     <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="exchange-dark.html"><img src="assets/img/logo-light.svg" alt="logo"></a>
+      <a class="navbar-brand" href="#"><img src=" {{ asset ('assets/img/logo-light.svg') }}"  alt="logo"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu"
         aria-controls="headerMenu" aria-expanded="false" aria-label="Toggle navigation">
         <i class="icon ion-md-menu"></i>
@@ -15,10 +15,8 @@
               Exchange
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="exchange-dark.html">Exchange</a>
-              <a class="dropdown-item" href="exchange-dark-live-price.html">Exchange Live Price</a>
-              <a class="dropdown-item" href="exchange-dark-ticker.html">Exchange Ticker</a>
-              <a class="dropdown-item" href="exchange-dark-fluid.html">Exchange Fluid</a>
+              <a class="dropdown-item" href="{{ route('exchange_price' ) }}">Exchange</a>
+              <a class="dropdown-item" href="{{ route('exchange_live' ) }}">Exchange Live Price</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -27,12 +25,8 @@
               Markets
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="markets-dark.html">Markets</a>
-              <a class="dropdown-item" href="market-capital-dark.html">Markets Line</a>
-              <a class="dropdown-item" href="market-capital-bar-dark.html">Markets Bar</a>
-              <a class="dropdown-item" href="market-overview-dark.html">Market Overview</a>
-              <a class="dropdown-item" href="market-screener-dark.html">Market Screener</a>
-              <a class="dropdown-item" href="market-crypto-dark.html">Market Crypto</a>
+              <a class="dropdown-item" href="{{ route('technical_analysis') }}">Technical Analysis</a>
+              <a class="dropdown-item" href="{{ route('market_crypto') }}">Market Crypto</a>
             </div>
           </li>
 
@@ -43,13 +37,9 @@
               Others
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="technical-analysis-dark.html">Technical Analysis</a>
               <a class="dropdown-item" href="cross-rates-dark.html">Cross Rates</a>
-              <a class="dropdown-item" href="symbol-info-dark.html">Symbol Info</a>
               <a class="dropdown-item" href="heat-map-dark.html">Heat Map</a>
-              <a class="dropdown-item" href="signin-dark.html">Sign in</a>
-              <a class="dropdown-item" href="signup-dark.html">Sign up</a>
-              <a class="dropdown-item" href="404-dark.html">404</a>
+             
             </div>
           </li>
         </ul>
@@ -67,7 +57,7 @@
         <li class="nav-item dropdown header-img-icon">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
-              <img src="assets/img/avatar.svg" alt="avatar">
+              <img src="{{ asset ('assets/img/avatar.svg') }}" alt="avatar">
             </a>
             <div class="dropdown-menu">
               <div class="dropdown-header d-flex flex-column align-items-center">
