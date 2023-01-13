@@ -8,8 +8,7 @@
       <div class="row">
         <div class="offset-md-2 col-md-8 text-center">
           <h2>A trusted and secure cryptocurrency exchange.</h2>
-          <p>Crypo is the most advanced UI kit for making the Blockchain platform.
-            This kit comes with 4 different exchange page, market, wallet and many more</p>
+          <p>Crypo Is a Forex and Cryptocurrency Trading Investment</p>
          
           </div>
         </div>
@@ -77,9 +76,7 @@
       <div class="row">
         <div class="col-md-6">
           <h2>The most advance and secure cryptocurrency platform.</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam iusto, nisi illo nulla alias fugiat
-            repudiandae unde ab maxime placeat facere, dicta deleniti ipsam animi expedita quam minus perferendis
-            veniam?</p>
+         
           <ul>
             <li><i class="icon ion-ios-checkmark-circle"></i> Live Technical Analysis</li>
             <li><i class="icon ion-ios-checkmark-circle"></i> Live Market Data</li>
@@ -131,9 +128,7 @@
         </div>
         <div class="offset-md-1 col-md-6">
           <h2>Live Market Gainers and Losers tracking</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam iusto, nisi illo nulla alias fugiat
-            repudiandae unde ab maxime placeat facere, dicta deleniti ipsam animi expedita quam minus perferendis
-            veniam?</p>
+          
           <ul>
             <li><i class="icon ion-ios-checkmark-circle"></i> Live Gainers Tracking</li>
             <li><i class="icon ion-ios-checkmark-circle"></i> Live Losers Tracking</li>
@@ -156,24 +151,21 @@
           <div class="landing-feature-item">
             <img src="assets/img/landing/stroge.svg" alt="">
             <h3>Secure storage</h3>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quaerat, quidem ut, fugiat blanditiis
-              facere</p>
+            <p>Comodo SSL Encryption on all incoming and outgoing transactions DDOS GUARD PROTECTION, SITELOCK WEB SECURITY</p>
           </div>
         </div>
         <div class="col-md-4">
           <div class="landing-feature-item">
             <img src="assets/img/landing/backup.svg" alt="">
             <h3>Protected by insurance</h3>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quaerat, quidem ut, fugiat blanditiis
-              facere</p>
+            <p>LWestfxtrading is certified worldwide and We accept BTC, BTC Cash, Perfect Money and Ethereum as payment methods</p>
           </div>
         </div>
         <div class="col-md-4">
           <div class="landing-feature-item">
             <img src="assets/img/landing/managment.svg" alt="">
             <h3>Industry best practices</h3>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quaerat, quidem ut, fugiat blanditiis
-              facere</p>
+            <p>offers simple, amazing and affordable opportunities to provide stable return on your investment.</p>
           </div>
         </div>
       </div>
