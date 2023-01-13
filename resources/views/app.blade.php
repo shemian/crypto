@@ -7,7 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Live Crypto</title>
   <link rel="icon" href="assets/img/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="{{ asset ('assets/css/style.css') }}">
+
 </head>
 
 <body id="dark">
