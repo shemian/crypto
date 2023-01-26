@@ -7,8 +7,8 @@
     <div class="container">
       <div class="row">
         <div class="offset-md-2 col-md-8 text-center">
-          <h2>A trusted and secure cryptocurrency exchange.</h2>
-          <p>Crypo Is a Forex and Cryptocurrency Trading Investment</p>
+          <h2>A trusted and secure Forex and cryptocurrency exchange.</h2>
+          <p>We are the Leading Forex and Cryptocurrency Trading and Investment Company</p>
          
           </div>
         </div>
@@ -75,7 +75,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <h2>The most advance and secure cryptocurrency platform.</h2>
+          <h2>The most advance and secure forex and cryptocurrency platform.</h2>
          
           <ul>
             <li><i class="icon ion-ios-checkmark-circle"></i> Live Technical Analysis</li>
@@ -145,7 +145,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>Here are a few reasons why <br> you should choose Crypo</h2>
+          <h2>Here are a few reasons why <br> you should choose GoFxCrypo</h2>
         </div>
         <div class="col-md-4">
           <div class="landing-feature-item">

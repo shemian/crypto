@@ -77,6 +77,7 @@
                       <span>Profile</span>
                     </a>
                   </li>
+                  
                   <li class="nav-item">
                     <a href="{{ route('wallet') }} " class="nav-link">
                       <i class="icon ion-md-wallet"></i>
