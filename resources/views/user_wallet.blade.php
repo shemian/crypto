@@ -7,10 +7,11 @@
         <div class="col-md-12 col-lg-3">
           <div class="nav flex-column nav-pills settings-nav" id="v-pills-tab" role="tablist"
             aria-orientation="vertical">
-            <a class="nav-link" id="dashboard-tab" data-toggle="pill" href="#dashboard" role="tab"
+            <a class="nav-link " id="dashboard-tab" data-toggle="pill" href="#dashboard" role="tab"
               aria-controls="settings-wallet" aria-selected="false"><i class="icon ion-md-settings"></i>Dashboard</a>
+
             <a class="nav-link active" id="settings-wallet-tab" data-toggle="pill" href="#settings-wallet" role="tab"
-              aria-controls="settings-wallet" aria-selected="false"><i class="icon ion-md-wallet"></i> Wallet</a>
+              aria-controls="settings-wallet" aria-selected="false"><i class="icon ion-md-wallet"></i>Deposit</a>
               <a class="nav-link" id="withdraw-tab" data-toggle="pill" href="#withdraw" role="tab"
               aria-controls="withdraw" aria-selected="false"><i class="icon ion-md-settings"></i>Withdraw</a>
               <a class="nav-link" id="invest-tab" data-toggle="pill" href="#invest" role="tab"
@@ -467,12 +468,12 @@
                                  Scan the QR Code or copy the wallet address and send TO this Address
                               
                               </p>
-                                <div class="input-group">
+                              <div class="input-group">
                                   <input type="text" class="form-control" value="Ad87deD4gEe8dG57Ede4eEg5dREs4d5e8f4e"> 
                                 </div>
                               </div>
                               <div class="col-md-4">
-                                <img src="assets/img/qr-code-light.svg" alt="qr-code">
+                                <img src="assets/img/qr2.svg" alt="qr-code">
                               </div>
                             </div>
                           </div>
@@ -527,7 +528,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Withdraw</h5>
                   <div class="settings-notification">
-                    <form  method="post" action="{{ route('withdraw_request') }}">
+                    <form  method="POST" action="{{ route('withdraw_request') }}">
                         @csrf
                         <div class="form-row">
                             <div class="col-md-12">
@@ -623,22 +624,23 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                    <form action="" method="post" >
+                    <form action="{{ route('purchase_plan') }}" method="post" >
+                      @csrf
                       <p>IF YOU DO NOT HAVE SUFFICIENT BALANCE IN YOUR DEPOSIT ACCOUNT, THE REQUIRED FEE WILL BE DEDUCTED FROM YOUR PROFIT BALANCE.</p>
                       <input type="hidden"  class="form-control" id ="transaction_id" name="transaction_id">
 
-                      <label for="amount"  style="color: black">Wallet Balance: </label>
-                      <input class="form-control" type="text" name="amount" value="$ {{ $amounts}}" disabled>
+                      <label for="balance"  style="color: black">Wallet Balance: </label>
+                      <input class="form-control" type="text" name="balance" value="$ {{ $amounts}}" disabled>
 
-                      <label for="status" style="color: black">USD: </label>
-                      <input class="form-control" id="status" type="number" min="0.00" max="100000.00" name="status">
+                      <label for="amount" style="color: black">USD: </label>
+                      <input class="form-control" id="status" type="number" min="0.00" max="100000.00" name="amount">
 
                       <span class ="text-danger error-text status_error"></span>
                       
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Purchase</button>
+                      <button type="submit" class="btn btn-primary">Purchase</button>
                     </div>
 
                     </form>
