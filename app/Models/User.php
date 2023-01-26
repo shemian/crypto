@@ -28,6 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'bitcoin_address',
         'eth_address',
         'perfect_money_address',
+        'wallet_balance',
         'role_as'
     ];
 
