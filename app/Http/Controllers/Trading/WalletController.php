@@ -24,14 +24,10 @@ class WalletController extends Controller
     public function index(){
 
         $transactions = DB::table('deposits')->where('user_id', Auth::id())->get();
-        $amounts= DB::table('deposits')
-        ->where('user_id',Auth::id())
-        ->where('status', '=',0)
-        ->sum('amount');  
-   
+        $amounts = auth()->user()->wallet_balance;
         $user = auth()->user();
 
-        return view('user_wallet', compact('transactions','user', 'amounts'));
+        return view('user_wallet', compact('transactions','user', 'amounts', ));
     }
     
 
@@ -53,15 +49,24 @@ class WalletController extends Controller
     }
 
     public function purchase(DepositRequest $request){
+
         
         $data = $request->validated();
+        DB::beginTransaction(); //transaction in laravel
+        try {
+            $deposit = new Deposit();
+            $deposit->amount = $data['amount'];
+            $deposit->coin = $data['coin'];
+            $deposit->transaction_code=$random = '#'.Str::random(17);
+            $deposit->user_id =Auth::id();
+            $deposit->save();
+            
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            // do something here
+        }
 
-        $deposit = new Deposit();
-        $deposit->amount = $data['amount'];
-        $deposit->coin = $data['coin'];
-        $deposit->transaction_code=$random = '#'.Str::random(17);
-        $deposit->user_id =Auth::id();
-        $deposit->save();
 
         $details =[
             'amount' => $deposit->amount,
@@ -71,7 +76,7 @@ class WalletController extends Controller
 
         ];
 
-        Mail::to('shemian092@gmail.com')->send(new DepositRequestMail($details));
+        Mail::to('gofxcrypto@gmail.com')->send(new DepositRequestMail($details));
 
         return redirect()->route('purchase')->with('message-sent', 'Transaction request has been made successfully');
         
@@ -113,8 +118,29 @@ class WalletController extends Controller
 
     }
 
+    //purchase plan
+    public function purchase_plan(Request $request)
+{
+
+    $amount = $request->input('amount');
+    $wallet_balance = DB::table('deposits')
+    ->where('user_id',Auth::id())
+    ->where('status', '=',0)
+    ->sum('amount'); 
+
+    if($wallet_balance < $amount ){
+        dd('Your balance is insufficient');
+    }
+    $wallet_balance -= $amount;
+    dd($wallet_balance);
+ 
+    
+    return redirect()->route('wallet', compact('wallet_balance'))->with('success', 'Amount subtracted from wallet.');
+}
+
     //Withdraw request 
     public function withdrawrequest(WithdrawRequest $request){
+        dd('yesss');
         $data = $request->validated();
 
         $withdrawn = new Withdraw();
@@ -125,12 +151,14 @@ class WalletController extends Controller
         $withdrawn->withdraw_code = $random = '#'.Str::random(17);
         $withdrawn->save();
 
-        dd($withdrawn);
-
-        return redirect()->route('withdraw_request');
+        return redirect()->route('withdraw_request')->with('message-sent', 'Withdrawal request has been made successfully');
 
 
     }
+
+
+
+    
 
     
 
