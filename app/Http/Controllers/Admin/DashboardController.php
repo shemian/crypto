@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Deposit;
+use App\Models\User;
 use DataTables;
 use Validator;
 use Log;
+use DB;
 
 class DashboardController extends Controller
 {
@@ -42,6 +44,7 @@ class DashboardController extends Controller
         
 
     } 
+    
 
 
     //GET TRANSACTION DETAILS
@@ -62,21 +65,36 @@ class DashboardController extends Controller
         $validator = Validator::make($request->all(),[
             'status'=>'required::deposits,status,'.$transaction_id,
         ]);
-
-        if(!$validator->passes()){
-            return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
-            $transaction = Deposit::find($transaction_id);
-            $transaction->status = $request->status;
-            $query = $transaction->save();
-            Log::info($query);
-            if($query){
-                return response()->json(['code'=>1, 'msg'=>'Status Updated Successfuly']);
+        
+        DB::beginTransaction(); //transaction in laravel
+        try {
+            if(!$validator->passes()){
+                return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
             }
             else{
-                return response()->json(['code'=>0, 'msg'=>'Failed Please try again Later']);
+                $transaction = Deposit::find($transaction_id);
+                $transaction->status = $request->status;
+                $query = $transaction->save();
+
+            
+                $userId = $transaction->user_id;
+                $user =  User::find($userId);
+                $user->increment('wallet_balance', $transaction->amount);
+
+                
+
+                Log::info($transaction->status);
+               
+                return response()->json(['code'=>1, 'msg'=>'Status Updated Successfuly']);
+               
             }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            // do something here
+            return response()->json(['code'=>0, 'msg'=>'Failed Please try again Later']);
         }
+
     }
 
 

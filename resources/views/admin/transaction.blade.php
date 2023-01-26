@@ -58,6 +58,7 @@
 @section('scripts')
 
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <script type="text/javascript">
     $.ajaxSetup({
@@ -139,8 +140,8 @@
                         $(form).find('span.'+prefix+'_error').text(val[0]);
                     });
                 }else{
-                    $('editstatus').modal('hide');
-                    $('editstatus').find('form')[0].reset();
+                    $('.editstatus').modal('hide');
+                    $('.editstatus').find('form')[0].reset();
                     toastr.success(data.msg)
                 }
             }

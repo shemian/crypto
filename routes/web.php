@@ -33,6 +33,11 @@ Route::post('/wallet', [WalletController::class, 'purchase'])->name('purchase');
 Route::put('/wallet', [WalletController::class, 'update'])->name('update_user_profile');
 Route::post('/wallet/withdraw', [WalletController::class, 'withdrawrequest'])->name('withdraw_request'); 
 
+
+
+
+
+
 //other Routes
 Route::get('/exchange-live', [WalletController::class, 'exchange_live'])->name('exchange_live');
 Route::get('/exchange', [WalletController::class, 'exchange'])->name('exchange_price');
@@ -43,6 +48,7 @@ Route::get('/market-crypto', [WalletController::class, 'market_crypto'])->name('
 
 //admin Routes
 Route::prefix('admin')->middleware(['auth', 'isAdmin', 'verified'])->group(function(){
+    
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/regusers', [DashboardController::class, 'regUsers'])->name('regusers');
     Route::get('/transactions', [DashboardController::class, 'getTransactions'])->name('transactions');

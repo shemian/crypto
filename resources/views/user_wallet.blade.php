@@ -624,7 +624,7 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                    <form action="{{ route('purchase_plan') }}" method="post" >
+                    <form action="" method="post" >
                       @csrf
                       <p>IF YOU DO NOT HAVE SUFFICIENT BALANCE IN YOUR DEPOSIT ACCOUNT, THE REQUIRED FEE WILL BE DEDUCTED FROM YOUR PROFIT BALANCE.</p>
                       <input type="hidden"  class="form-control" id ="transaction_id" name="transaction_id">
