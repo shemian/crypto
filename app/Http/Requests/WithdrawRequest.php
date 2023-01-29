@@ -30,10 +30,10 @@ class WithdrawRequest extends FormRequest
                 'integer',
                 'required',
             ],
-            'type' =>[
+            'tradetype' =>[
                 'required',
             ],
-            "method" =>[
+            "coin" =>[
                 'required',
             ],
             "wallet_id" =>[
