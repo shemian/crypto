@@ -1,6 +1,6 @@
 <header class="dark-bb">
     <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="#"><img src=" {{ asset ('assets/img/logo-light.svg') }}"  alt="logo"></a>
+      <a class="navbar-brand" href="{{route('home') }}"><img src=" {{ asset ('assets/img/logo-light.svg') }}"  alt="logo"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu"
         aria-controls="headerMenu" aria-expanded="false" aria-label="Toggle navigation">
         <i class="icon ion-md-menu"></i>
@@ -16,7 +16,6 @@
             </a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="{{ route('exchange_price' ) }}">Exchange</a>
-              <a class="dropdown-item" href="{{ route('exchange_live' ) }}">Exchange Live Price</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -25,21 +24,7 @@
               Markets
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{ route('technical_analysis') }}">Technical Analysis</a>
               <a class="dropdown-item" href="{{ route('market_crypto') }}">Market Crypto</a>
-            </div>
-          </li>
-
-          
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Others
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="cross-rates-dark.html">Cross Rates</a>
-              <a class="dropdown-item" href="heat-map-dark.html">Heat Map</a>
-             
             </div>
           </li>
         </ul>
@@ -71,12 +56,7 @@
               </div>
               <div class="dropdown-body">
                 <ul class="profile-nav">
-                  <li class="nav-item">
-                    <a href="settings-profile-dark.html" class="nav-link">
-                      <i class="icon ion-md-person"></i>
-                      <span>Profile</span>
-                    </a>
-                  </li>
+                 
                   
                   <li class="nav-item">
                     <a href="{{ route('wallet') }} " class="nav-link">
@@ -85,15 +65,27 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="settings-dark.html" class="nav-link">
-                      <i class="icon ion-md-settings"></i>
-                      <span>Settings</span>
+                    <a href="{{ route('wallet') }} " class="nav-link">
+                      <i class="icon ion-md-person"></i>
+                      <span>Deposit</span>
                     </a>
                   </li>
-                  <li class="nav-item" id="changeThemeDark">
-                    <a href="#!" class="nav-link">
-                      <i class="icon ion-md-moon"></i>
-                      <span>Theme</span>
+                  <li class="nav-item">
+                    <a href="{{ route('wallet') }} " class="nav-link">
+                      <i class="icon ion-md-settings"></i>
+                      <span>Withdraw</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('wallet') }} " class="nav-link">
+                      <i class="icon ion-md-settings"></i>
+                      <span>Invest</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('wallet') }} " class="nav-link">
+                      <i class="icon ion-md-settings"></i>
+                      <span>Settings</span>
                     </a>
                   </li>
                   <li class="nav-item">
