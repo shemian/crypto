@@ -12,6 +12,7 @@ class DepositRequestMail extends Mailable
     use Queueable, SerializesModels;
 
     public $details;
+    
      
 
     /**
