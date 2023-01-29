@@ -36,6 +36,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Deposit::class);
     }
 
+
+    public function withdrawals(){
+        return $this->hasMany(Withdraw::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
