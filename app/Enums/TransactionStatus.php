@@ -11,6 +11,6 @@ use BenSampo\Enum\Enum;
  */
 final class TransactionStatus extends Enum
 {
-    const Paid =   0;
-    const Pending=   1;
+    const Paid =0;
+    const Pending=1;
 }
