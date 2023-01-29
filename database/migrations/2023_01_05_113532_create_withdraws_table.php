@@ -16,12 +16,14 @@ class CreateWithdrawsTable extends Migration
     {
         Schema::create('withdraws', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->integer('amount');
             $table->string('type');
             $table->string('method');
             $table->string('wallet_id');
             $table->string('status')->default(WithdrawStatus::Pending);
             $table->string('withdraw_code');
+            $table->foreign('user_id')->on('users')->references('id')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->timestamps();
         });
     }
