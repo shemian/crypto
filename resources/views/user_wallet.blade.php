@@ -528,18 +528,28 @@
                 <div class="card-body">
                   <h5 class="card-title">Withdraw</h5>
                   <div class="settings-notification">
+                    
+                    @if(Session::has('withdraw-message'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <strong>Great </strong> {{Session::get('withdraw-message')}}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    @endif
+
                     <form  method="POST" action="{{ route('withdraw_request') }}">
                         @csrf
                         <div class="form-row">
                             <div class="col-md-12">
                                 <label for="amount">Amount</label>
-                                <input id="amount" name="amount" type="number" min="0.00" max="100000.00" step="1" class="form-control" placeholder="Enter The Ammount">>
+                                <input id="amount" name="amount" type="number" min="0.00" max="100000.00" step="1" class="form-control" placeholder="Enter The Amount">
 
                             </div>
 
                             <div class="col-md-12">
-                                  <label for="TradingType">Type</label>
-                                  <select id="selectTradeType" name="Tradetype" class="custom-select">
+                                  <label for="tradetype">Type</label>
+                                  <select id="selectTradeType" name="tradetype" class="custom-select">
                                     <option selected>Trading Balance</option>
                                     <option>Referral Earnings</option>
                                   </select>
@@ -561,7 +571,7 @@
 
                             <div class="col-md-12 mt-4">
                                 <label for="walletId">Wallet ID</label>
-                                <input id="walletId" type="text" class="form-control" placeholder="Enter Wallet Id">
+                                <input id="walletId" name="wallet_id" type="text" class="form-control" placeholder="Enter Wallet Id">
                              </div>
 
 
@@ -590,21 +600,25 @@
                             <th>Status</th>
                         </tr>
                       </thead>
-                      <!-- <tbody>
-                        @foreach($transactions as $transaction)
+                      <tbody>
+                        @foreach($withdrawals as $withdrawal)
                         <tr>
                                     
-                            <td>{{$transaction->id}}</td>
-                            <td>{{$transaction->transaction_code}}</td>
-                            <td>{{$transaction->created_at}}</td>
-                            <td>{{$transaction->amount}}</td>
-                            <td>{{$transaction->coin}}</td>
+                            <td>{{$withdrawal->id}}</td>
+                            <td>{{$withdrawal->withdraw_code}}</td>
+                            <td>{{$withdrawal->created_at}}</td>
+                            <td>{{$withdrawal->amount}}</td>
+                            <td>{{$withdrawal->method}}</td>
+                            @if($withdrawal->status == 0)
+                            <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
+                            @else
                             <td><i class="icon ion-md-checkmark-circle-outline red"></i></td>
+                            @endif
                             
                         </tr>
                         @endforeach
                         
-                      </tbody> -->
+                      </tbody>
                     </table>
                   </div>
                 </div>
@@ -624,7 +638,7 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                    <form action="" method="post" >
+                    <form action="{{ route('purchase_plan') }}" method="post" >
                       @csrf
                       <p>IF YOU DO NOT HAVE SUFFICIENT BALANCE IN YOUR DEPOSIT ACCOUNT, THE REQUIRED FEE WILL BE DEDUCTED FROM YOUR PROFIT BALANCE.</p>
                       <input type="hidden"  class="form-control" id ="transaction_id" name="transaction_id">
