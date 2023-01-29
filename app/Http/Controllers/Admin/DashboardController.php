@@ -10,6 +10,7 @@ use DataTables;
 use Validator;
 use Log;
 use DB;
+use App\Http\Requests\UpdateStatusRequest;
 
 class DashboardController extends Controller
 {
@@ -60,38 +61,37 @@ class DashboardController extends Controller
 
     //Update transaction status
 
-    public function updateTransactionDetails(Request $request){
-        $transaction_id = $request->transaction_id;
-        $validator = Validator::make($request->all(),[
-            'status'=>'required::deposits,status,'.$transaction_id,
-        ]);
+    public function updateTransactionDetails(UpdateStatusRequest $request){
         
-        DB::beginTransaction(); //transaction in laravel
+        
+        // //transaction in laravel
         try {
-            if(!$validator->passes()){
-                return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-            }
-            else{
-                $transaction = Deposit::find($transaction_id);
+            DB::beginTransaction(); 
+        
+                $transaction = Deposit::find($request->transaction_id);
                 $transaction->status = $request->status;
-                $query = $transaction->save();
-
-            
+                $transaction->save();
+                
+               
                 $userId = $transaction->user_id;
                 $user =  User::find($userId);
+                if( $transaction->status == 0){
                 $user->increment('wallet_balance', $transaction->amount);
+                } else{
+                    $user->decrement('wallet_balance', $transaction->amount);
 
-                
-
-                Log::info($transaction->status);
-               
+                }
+         
+                Log::info($transaction);
+                DB::commit();
                 return response()->json(['code'=>1, 'msg'=>'Status Updated Successfuly']);
                
-            }
-            DB::commit();
+            
+          
         } catch (\Exception $e) {
             DB::rollback();
             // do something here
+            Log::error($e);
             return response()->json(['code'=>0, 'msg'=>'Failed Please try again Later']);
         }
 
