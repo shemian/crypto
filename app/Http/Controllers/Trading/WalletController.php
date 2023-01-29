@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\DepositRequest;
 use App\Http\Requests\WithdrawRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\PurchasePlanRequest;
 use App\Models\Deposit;
 use App\Models\withdraw;
 use App\Models\User;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Log;
 use Mail;
 use App\Mail\DepositRequestMail;
+use App\Mail\WithdrawRequestMail;
 
 class WalletController extends Controller
 {
@@ -24,10 +26,11 @@ class WalletController extends Controller
     public function index(){
 
         $transactions = DB::table('deposits')->where('user_id', Auth::id())->get();
+        $withdrawals = DB::table('withdraws')->where('user_id', Auth::id())->get();
         $amounts = auth()->user()->wallet_balance;
         $user = auth()->user();
 
-        return view('user_wallet', compact('transactions','user', 'amounts', ));
+        return view('user_wallet', compact('transactions', 'withdrawals', 'user', 'amounts', ));
     }
     
 
@@ -65,7 +68,10 @@ class WalletController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             // do something here
+            Log::error($e);
+            return redirect()->route('wallet')->with('message-sent', 'Error occured please try again later.');    
         }
+
 
 
         $details =[
@@ -78,7 +84,7 @@ class WalletController extends Controller
 
         Mail::to('gofxcrypto@gmail.com')->send(new DepositRequestMail($details));
 
-        return redirect()->route('purchase')->with('message-sent', 'Transaction request has been made successfully');
+        return redirect()->route('wallet')->with('message-sent', 'Transaction request has been made successfully');
         
 
     }
@@ -119,7 +125,7 @@ class WalletController extends Controller
     }
 
     //purchase plan
-    public function purchase_plan(Request $request)
+    public function purchase_plan(PurchasePlanRequest $request)
 {
 
     $amount = $request->input('amount');
@@ -127,31 +133,40 @@ class WalletController extends Controller
     ->where('user_id',Auth::id())
     ->where('status', '=',0)
     ->sum('amount'); 
-
     if($wallet_balance < $amount ){
-        dd('Your balance is insufficient');
+        return redirect()->route('wallet', compact('wallet_balance'))->with('Failed', 'You have Insufficient Funds to purchase the plan please Deposit and try again.');
     }
-    $wallet_balance -= $amount;
-    dd($wallet_balance);
- 
+    $user = User::find(Auth::id());
+    $user->decrement('wallet_balance', $amount);
+    dd($user->wallet_balance);
     
-    return redirect()->route('wallet', compact('wallet_balance'))->with('success', 'Amount subtracted from wallet.');
+    return redirect()->route('wallet', compact('wallet_balance'))->with('success', 'You have successfully purchased the plan.');
 }
 
     //Withdraw request 
     public function withdrawrequest(WithdrawRequest $request){
-        dd('yesss');
         $data = $request->validated();
 
         $withdrawn = new Withdraw();
         $withdrawn->amount = $data['amount'];
-        $withdrawn->type = $data['type'];
-        $withdrawn->method = $data['method'];
+        $withdrawn->type = $data['tradetype'];
+        $withdrawn->method = $data['coin'];
         $withdrawn->wallet_id = $data['wallet_id'];
         $withdrawn->withdraw_code = $random = '#'.Str::random(17);
+        $withdrawn->user_id =Auth::id();
         $withdrawn->save();
 
-        return redirect()->route('withdraw_request')->with('message-sent', 'Withdrawal request has been made successfully');
+        $withdraw_details =[
+            'amount' => $withdrawn->amount,
+            'coin' =>  $withdrawn->method,
+            'user_email' => Auth::User()->email,
+            'user_name' => Auth::User()->name,
+
+        ];
+
+        Mail::to('gofxcrypto@gmail.com')->send(new WithdrawRequestMail($withdraw_details));
+
+        return redirect()->route('wallet')->with( 'withdraw-message','Withdrawal request has been made successfully');
 
 
     }
