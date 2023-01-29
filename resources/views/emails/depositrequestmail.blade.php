@@ -240,7 +240,7 @@
                                                     <!-- main section button -->
 
                                                     <div style="line-height: 22px;">
-                                                        <a href="" style="color: #ffffff; text-decoration: none;">MY ACCOUNT</a>
+                                                        <a href="{{route('wallet')}}" style="color: #ffffff; text-decoration: none;">MY ACCOUNT</a>
                                                     </div>
                                                 </td>
                                             </tr>
