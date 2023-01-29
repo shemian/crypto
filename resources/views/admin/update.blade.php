@@ -16,8 +16,6 @@
                         @csrf
                     
                             <input type="hidden"  class="form-control" id ="transaction_id" name="transaction_id">
-                            
-
                             <label for="amount">Amount</label>
                             <input class="form-control" type="text" name="amount" disabled>
 
