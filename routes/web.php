@@ -29,9 +29,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('')->middleware(['auth', 'verified'])->group(function(){
 
 Route::get('/wallet', [WalletController::class, 'index'])->name('wallet');
-Route::post('/wallet', [WalletController::class, 'purchase'])->name('purchase');
-Route::put('/wallet', [WalletController::class, 'update'])->name('update_user_profile');
+Route::post('/wallet/purchase', [WalletController::class, 'purchase'])->name('purchase');
+Route::put('/wallet/update', [WalletController::class, 'update'])->name('update_user_profile');
 Route::post('/wallet/withdraw', [WalletController::class, 'withdrawrequest'])->name('withdraw_request'); 
+Route::post('/wallet/purchase-plan', [WalletController::class, 'purchase_plan'])->name('purchase_plan'); 
 
 
 
