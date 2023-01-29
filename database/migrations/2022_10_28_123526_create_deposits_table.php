@@ -21,8 +21,9 @@ class CreateDepositsTable extends Migration
             $table->string('coin');
             $table->string('transaction_code');
             $table->string('status')->default(TransactionStatus::Pending);
-            $table->timestamps();
             $table->foreign('user_id')->on('users')->references('id')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->timestamps();
+            
         });
     }
 
