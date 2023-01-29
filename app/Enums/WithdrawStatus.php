@@ -11,6 +11,6 @@ use BenSampo\Enum\Enum;
  */
 final class WithdrawStatus extends Enum
 {
-    const Withdrawn =   0;
-    const Pending =   1;
+    const Withdrawn = 0;
+    const Pending = 1;
 }
