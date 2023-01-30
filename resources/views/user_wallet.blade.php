@@ -54,7 +54,7 @@
                             <div class="card bg-light mb-3" style="max-width: 18rem;">
                             <div class="card-header d-flex justify-content-center">Referral Earnings</div>
                             <div class="card-body">
-                                <h2 class="card-text d-flex justify-content-center green"><span><strong style="color:green">$</strong style="color:green">5000</span></h2>
+                                <h2 class="card-text d-flex justify-content-center green"><span><strong style="color:green">$</strong style="color:green">0.00</span></h2>
                             </div>
                             </div>
                         </div>
@@ -134,13 +134,12 @@
                           <td>{{$transaction->amount}}</td>
                           <td>{{$transaction->coin}}</td>
                           <td>{{$transaction->created_at}}</td>
-                          <td>
-                            <div class="custom-control custom-switch">
-                              <input type="checkbox" class="custom-control-input" id="apiStatus1" checked>
-                              <label class="custom-control-label" for="apiStatus1"></label>
-                            </div>
-                          </td>
-                          <td><i class="icon ion-md-trash"></i></td>
+                          @if($transaction->status == 0)
+                          <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
+                          @else
+                          <td><i class="icon ion-md-checkmark-circle-outline red"></i></td>
+                          @endif
+      
                         </tr>
                         @endforeach
                         
@@ -839,59 +838,6 @@
                         </div>
                       </li>
                     </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="card settings-profile">
-                <div class="card-body">
-                  <h5 class="card-title">Create API Key</h5>
-                  <div class="form-row">
-                    <div class="col-md-6">
-                      <label for="generateKey">Generate key name</label>
-                      <input id="generateKey" type="text" class="form-control" placeholder="Enter your key name">
-                    </div>
-                    <div class="col-md-6">
-                      <label for="rewritePassword">Confirm password</label>
-                      <input id="rewritePassword" type="password" class="form-control"
-                        placeholder="Confirm your password">
-                    </div>
-                    <div class="col-md-12">
-                      <input type="submit" value="Create API key">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Your API Keys</h5>
-                  <div class="wallet-history">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Transaction code</th>
-                            <th>Date</th>
-                            <th>Amount</th>
-                            <th>Method</th>
-                            <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @foreach($transactions as $transaction)
-                        <tr>
-                                    
-                            <td>{{$transaction->id}}</td>
-                            <td>{{$transaction->transaction_code}}</td>
-                            <td>{{$transaction->created_at}}</td>
-                            <td>{{$transaction->amount}}</td>
-                            <td>{{$transaction->coin}}</td>
-                            <td><i class="icon ion-md-checkmark-circle-outline red"></i></td>
-                            
-                        </tr>
-                        @endforeach
-                        
-                      </tbody>
-                    </table>
                   </div>
                 </div>
               </div>
