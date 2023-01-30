@@ -138,7 +138,6 @@ class WalletController extends Controller
     }
     $user = User::find(Auth::id());
     $user->decrement('wallet_balance', $amount);
-    dd($user->wallet_balance);
     
     return redirect()->route('wallet', compact('wallet_balance'))->with('success', 'You have successfully purchased the plan.');
 }
