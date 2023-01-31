@@ -12,6 +12,7 @@
 
             <a class="nav-link active" id="settings-wallet-tab" data-toggle="pill" href="#settings-wallet" role="tab"
               aria-controls="settings-wallet" aria-selected="false"><i class="icon ion-md-wallet"></i>Deposit</a>
+              
               <a class="nav-link" id="withdraw-tab" data-toggle="pill" href="#withdraw" role="tab"
               aria-controls="withdraw" aria-selected="false"><i class="icon ion-md-settings"></i>Withdraw</a>
               <a class="nav-link" id="invest-tab" data-toggle="pill" href="#invest" role="tab"
