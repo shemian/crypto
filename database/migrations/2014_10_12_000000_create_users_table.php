@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('bitcoin_address')->nullable();
             $table->string('eth_address')->nullable();
             $table->string('perfect_money_address')->nullable();
-            $table->decimal('wallet_balance')->default(0);
+            $table->decimal('wallet_balance')->default(0.00);
             $table->integer('role_as')->default(0);
             $table->rememberToken();
             $table->timestamps();
