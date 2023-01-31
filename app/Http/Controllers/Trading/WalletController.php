@@ -32,6 +32,7 @@ class WalletController extends Controller
 
         return view('user_wallet', compact('transactions', 'withdrawals', 'user', 'amounts', ));
     }
+
     
 
     public function exchange_live(){
