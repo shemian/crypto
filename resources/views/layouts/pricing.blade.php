@@ -171,9 +171,17 @@ a {
                             <li> return of investment (ROI)</li>
                         </ul>
                     </div>
+                    @if($user = Auth::user())
+                        <div class="pricingTable-signup">
+                        <a href="{{route('wallet')}}">Purchase Plan</a>
+                    </div>
+            
+                    @else
                     <div class="pricingTable-signup">
                         <a href="{{route('register')}}">Get Started</a>
                     </div>
+                    
+                    @endif
                 </div>
             </div>
             
@@ -196,9 +204,18 @@ a {
                             <li> return of investment (ROI)</li>
                         </ul>
                     </div>
+                    @if($user = Auth::user())
+                        <div class="pricingTable-signup">
+                        <a href="{{route('wallet')}}">Purchase Plan</a>
+                    </div>
+            
+                    @else
                     <div class="pricingTable-signup">
                         <a href="{{route('register')}}">Get Started</a>
                     </div>
+                    
+                    @endif
+
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
@@ -220,9 +237,17 @@ a {
                             <li> return of investment (ROI)</li>
                         </ul>
                     </div>
+                    @if($user = Auth::user())
+                        <div class="pricingTable-signup">
+                        <a href="{{route('wallet')}}">Purchase Plan</a>
+                    </div>
+            
+                    @else
                     <div class="pricingTable-signup">
                         <a href="{{route('register')}}">Get Started</a>
                     </div>
+                    
+                    @endif
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
@@ -244,9 +269,17 @@ a {
                             <li> return of investment (ROI)</li>
                         </ul>
                     </div>
+                    @if($user = Auth::user())
+                        <div class="pricingTable-signup">
+                        <a href="{{route('wallet')}}">Purchase Plan</a>
+                    </div>
+            
+                    @else
                     <div class="pricingTable-signup">
                         <a href="{{route('register')}}">Get Started</a>
                     </div>
+                    
+                    @endif
                 </div>
             </div>
         </div>
